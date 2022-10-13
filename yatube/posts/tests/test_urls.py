@@ -34,7 +34,6 @@ class PostsURLTests(TestCase):
         # Авторизуем пользователя
         self.authorized_client.force_login(PostsURLTests.user)
 
-
     def test_urls_uses_correct_template(self):
         """URL-адрес использует соответствующий шаблон."""
         # Шаблоны по адресам
@@ -91,10 +90,10 @@ class PostsURLTests(TestCase):
         """
         Страница доступная только автору.
         """
-        response = self.authorized_client.get( 
-            f'/posts/{self.post.id}/edit/') 
+        response = self.authorized_client.get(
+            f'/posts/{self.post.id}/edit/')
         self.assertEqual(response.status_code, HTTPStatus.OK)
-    
+
     def test_redirect(self):
         """
         Проверка редиректа:
@@ -112,7 +111,7 @@ class PostsURLTests(TestCase):
         self.assertRedirects(
             response_create_guest, '/auth/login/?next=/create/'
         )
-    
+
     def test_url_edit_not_author_correct_template(self):
         """
         Проверка redirect при попытке изменить пост

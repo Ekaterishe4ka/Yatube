@@ -58,12 +58,7 @@ class PostCreateFormTests(TestCase):
     @classmethod
     def tearDownClass(cls):
         super().tearDownClass()
-        # Модуль shutil - библиотека Python с удобными инструментами
-        # для управления файлами и директориями: 
-        # создание, удаление, копирование, перемещение, изменение папок и файлов
-        # Метод shutil.rmtree удаляет директорию и всё её содержимое
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
-
 
     def setUp(self):
         # Создаем неавторизованный клиент
@@ -97,7 +92,7 @@ class PostCreateFormTests(TestCase):
             ).exists()
         )
 
-    def test_edit_post(self): 
+    def test_edit_post(self):
         """Валидная форма редактирования, обновляет запись в Post."""
         self.post = Post.objects.create(text='test text',
                                         author=self.user,
@@ -124,9 +119,9 @@ class PostCreateFormTests(TestCase):
         self.assertEqual(post.group, self.group_2)
         self.assertEqual(post.image, f'posts/{another_image.name}')
 
-    def test_auth_can_add_comments(self):
+    def test_try_add_comments(self):
         """
-        Комментировать посты может 
+        Комментировать посты может
         только авторизованный пользователь.
         """
         form_data = {
@@ -134,7 +129,7 @@ class PostCreateFormTests(TestCase):
             'author': self.user,
             'text': 'test text'
         }
-        response = self.authorized_client.post(
+        self.authorized_client.post(
             reverse('posts:add_comment', kwargs={'post_id': self.post.id}),
             data=form_data,
             follow=True

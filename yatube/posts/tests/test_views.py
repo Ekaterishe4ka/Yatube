@@ -193,7 +193,7 @@ class PostsViewsTests(TestCase):
         second_view = self.authorized_client.get(reverse('posts:index'))
         self.assertEqual(first_view.content, second_view.content)
         cache.clear()
-        third_view  = self.authorized_client.get(reverse('posts:index'))
+        third_view = self.authorized_client.get(reverse('posts:index'))
         self.assertNotEqual(first_view.content, third_view.content)
 
     def test_authorized_client_follow(self):
