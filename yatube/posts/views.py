@@ -50,7 +50,7 @@ def profile(request, username):
     context = {
         'author': author,
         'page_obj': page_obj,
-         'is_following': is_following,
+        'is_following': is_following,
     }
     return render(request, template, context)
 
@@ -113,7 +113,6 @@ def post_edit(request, post_id):
 @login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    author = post.author
     form = CommentForm(request.POST or None)
     if form.is_valid():
         comment = form.save(commit=False)

@@ -1,5 +1,4 @@
 from django import forms
-from django.forms.widgets import Textarea
 
 from .models import Post, Comment
 
@@ -21,6 +20,7 @@ class PostForm(forms.ModelForm):
             'group': 'Группа, к которой относится пост',
             'image': 'Загрузите картинку',
         }
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
