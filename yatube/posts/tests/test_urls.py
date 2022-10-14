@@ -65,10 +65,6 @@ class PostsURLTests(TestCase):
                 response = self.guest_client.get(address)
                 self.assertEqual(response.status_code, HTTPStatus.OK)
 
-    def test_unexisting_page_url_exists(self):
-        response = self.guest_client.get('/unexisting_page/')
-        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
-
     def test_urls_uses_correct_template_logged_in(self):
         """
         Страницы доступные авторизованному пользователю.

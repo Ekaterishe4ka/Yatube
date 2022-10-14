@@ -40,8 +40,8 @@ def profile(request, username):
     paginator = Paginator(posts, COUNT_PUB)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    is_following = (request.user != author
-                    and request.user.is_authenticated
+    is_following = (request.user.is_authenticated
+                    and request.user != author
                     and Follow.objects.filter(
                         user=request.user,
                         author=author
@@ -64,7 +64,6 @@ def post_detail(request, post_id):
     comments = post.comments.all()
     context = {
         'post': post,
-        'text': text,
         'author': author,
         'post_count': post_count,
         'form': form,
@@ -147,9 +146,9 @@ def profile_follow(request, username):
 @login_required
 def profile_unfollow(request, username):
     # Дизлайк, отписка
-    get_object_or_404(
-        Follow,
+    follow = Follow.objects.filter(
         user=request.user,
         author__username=username
-    ).delete()
+    )
+    follow.delete()
     return redirect('posts:profile', username=username)
