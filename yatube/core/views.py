@@ -4,7 +4,8 @@ from django.shortcuts import render
 
 
 def page_not_found(request, exception):
-    # Комментарий для ревью: ecли вместо status=404 написать HTTPStatus.NOT_FOUND, то не проходит pytest
+    # Комментарий для ревью: ecли вместо status=404
+    # написать HTTPStatus.NOT_FOUND, то не проходит pytest
     return render(request, 'core/404.html', {'path': request.path}, status=404)
 
 
