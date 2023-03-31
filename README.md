@@ -6,7 +6,7 @@ Yatube - социальная сеть для публикации личных 
 - Python 3.7+
 - Works on Linux, Windows, macOS
 
-# Стек технологий:
+# Стек технологий
 - Python 3.7
 - Django 2.2.16
 
